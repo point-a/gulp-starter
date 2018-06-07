@@ -1,0 +1,18 @@
+include _mixins
+doctype html
+html
+  head
+    include _head
+
+  body(class=bodyClass)
+    //BEGIN out
+    .out(class=outClass)
+      block header
+        include ../partials/_header
+      block content
+    //END out
+
+    //LOAD SCRIPTS
+    block scripts
+      script(type="text/javascript" src="https://cdn.jsdelivr.net/combine/npm/jquery@3.3.1,npm/swiper@4.3.3,npm/@fancyapps/fancybox@3.3.5")
+      script(type="text/javascript" src="js/app.js")
