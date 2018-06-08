@@ -3,6 +3,3 @@ ProjectTitle: main
 PageList:
 - file: page
   name: 'Главная'
-
-- file: test
-  name: 'Не главная'
