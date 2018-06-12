@@ -30,3 +30,7 @@ nbproject
 _tmp
 node_modules
 bower_components
+
+
+# Production folder
+build/
