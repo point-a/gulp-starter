@@ -1,0 +1,13 @@
+extends layouts/_layout
+block variables
+	- var title = 'Главная страница'
+	- var pageClass = 'home-page'
+
+
+block content
+	h1 Gulp starter of
+		a(href="https://point-agency.net" target="_blank") Point agency
+	p icon mixin example
+	+icon('icon-facebook')
+	p button mixin example
+	+button('Button')
