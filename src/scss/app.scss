@@ -1,24 +1,24 @@
 // Libs
 @import "lib/bootstrap/bootstrap-grid";
 
-// Generated
-@import "generated/_sprite-svg";
-
 // Helpers
 @import "helpers/_all";
 
-// Main
+// Generated
+@import "generated/_sprite-svg";
+
+// Common
 @import "common";
-@import "main";
 
 // Partials
 @import "partials/header";
 @import "partials/footer";
 
-// Blocks
+// Components
+@import "components/all";
 
+// Blocks
+@import "blocks/all";
 
 // Pages
-@import "pages/home";
-
-
+@import "pages/all";

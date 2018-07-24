@@ -1,107 +1,129 @@
 // @font-face mixin
-// Order of the includes matters, and it is: normal, bold, italic, bold+italic.
-// Forked from Bourbon. https://github.com/thoughtbot/bourbon/
-@mixin font-face($font-family, $file-path, $weight: normal, $style: normal) {
+@mixin font-face($alias, $name, $weight) {
     @font-face {
-        font-family: $font-family;
+        font-family: $alias;
+        src: url("../fonts/" + $name + ".woff2") format("woff2"), url("../fonts/" + $name + ".woff") format("woff");
         font-weight: $weight;
-        font-style: $style;
-
-        src: url('#{$file-path}.eot');
-        src: url('#{$file-path}.eot?#iefix') format('embedded-opentype'),
-        url('#{$file-path}.woff') format('woff'),
-        url('#{$file-path}.ttf') format('truetype'),
-        url('#{$file-path}.svg##{$font-family}') format('svg');
+        font-style: normal;
+        //font-display: swap;
     }
 }
-
+// to use:
+// @include font-face(black, cytiapro-black-webfont)
 
 
 // width
 @mixin r($width) {
-  @media only screen and (max-width: $width+ "px") {
-    @content;
-  }
+    @media only screen and (max-width: $width+ "px") {
+        @content;
+    }
 }
 
 @mixin rmin($width) {
-  @media only screen and (min-width: $width+ "px") {
-    @content;
-  }
+    @media only screen and (min-width: $width+ "px") {
+        @content;
+    }
 }
+
 
 // height
 @mixin rh($height) {
-  @media only screen and (max-height: $height + "px") {
-    @content;
-  }
+    @media only screen and (max-height: $height + "px") {
+        @content;
+    }
 }
 
 @mixin rhmin($height) {
-  @media only screen and (min-height: $height + "px") {
-    @content;
-  }
+    @media only screen and (min-height: $height + "px") {
+        @content;
+    }
 }
 
 
+@mixin image($image) {
+    background-image: url($image);
+}
+
+@mixin trans($what: all, $dur: 0.2s, $easing: ease) {
+    transition: $what $dur $easing;
+}
+
+@mixin smooth-font() {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+@mixin gpu {
+    transform: translate3d(0,0,0);
+}
+
+@mixin lg {
+    @include r(1199) {
+        @content;
+    }
+}
+
+@mixin md {
+    @include r(991) {
+        @content;
+    }
+}
+
+@mixin sm {
+    @include r(767) {
+        @content;
+    }
+}
+
+@mixin xs {
+    @include r(575) {
+        @content;
+    }
+}
+
 
 @mixin text-overflow {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 
 @mixin hover {
-  .no-touch &:hover {
-    @content;
-  }
+    .no-touch &:hover {
+        @content;
+    }
 }
+
 
 // retina, also available as +hdpi
 @mixin retina {
-  @media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2) {
-    @content;
-  }
-}
-
-// font-family 
-@mixin font($alias, $name) {
-  @font-face {
-      font-family: $alias;
-      src: url("../fonts/" + $name + ".woff2") format("woff2"), url("../fonts/" + $name + ".woff") format("woff");
-      font-weight: normal;
-      font-style: normal;
-      font-display: swap;
+    @media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2) {
+        @content;
     }
 }
-// to use:
-//+font(black, cytiapro-black-webfont)
+
 
 @mixin counter($var, $sep) {
-  counter-reset: list + $var;
-  & > li {
-    &:before {
-      content: counter(list + $var) $sep;
-      counter-increment: list + $var;
-    }
-    
-  }
-}
-
-
-@mixin font-face($font-family,$alias, $file-path, $weight: normal, $style: normal, $asset-pipeline: false ) { 
-    @font-face {
-        font-family: $font-family;
-        font-weight: $weight;
-        font-style: $style;
-        src: url("#{$file-path}.eot");
-        src: local("#{$font-family} #{$alias}"), local('#{$font-family}-#{$alias}'),
-        url("#{$file-path}.eot?#iefix") format('embedded-opentype'),
-        url("#{$file-path}.woff") format('woff2'),
-        url("#{$file-path}.woff") format('woff'),
-        url("#{$file-path}.ttf") format('truetype')
+    counter-reset: list + $var;
+    & > li {
+        &:before {
+            content: counter(list + $var) $sep;
+            counter-increment: list + $var;
+        }
     }
 }
 
 
+// Position absolute
+@mixin absolute() {
+    content: '';
+    position: absolute;
+    @content;
+}
+
+// Width & height
+//@mixin size($width, $height) {
+//	width: $width;
+//	height: $height;
+//}
