@@ -47,6 +47,8 @@
       width: 300px;
       padding: 30px 0;
       padding-top: 130px;
+        padding-bottom: 70px;
+        height: 100%;
     }
 
     .preview{
@@ -80,7 +82,11 @@
 
     .pagelist{
       list-style-type: none;
-      width: 260px;
+      width: 100%;
+        padding-right: 30px;
+        overflow-y: auto;
+        max-height: calc(100% - 40px);
+
     }
     .pagelist li{
       width: 100%;
@@ -96,7 +102,6 @@
       box-shadow: none;
       padding: 5px 20px;
       border: 1px solid #000;
-      font-size: 13px;
       margin-top: 10px;
       text-transform: uppercase;
       text-shadow: none;
@@ -107,7 +112,6 @@
       display: block;
       
       text-decoration: none;
-      padding: 5px 8px 5px 3px;
       position: relative;
       padding: 7px;
       padding-left: 25px;
@@ -199,8 +203,6 @@
       font-size: 30px;
     }
     .header__updated{
-      font-size: 24px;
-      color: #050a0f;
       display: inline-block;
       vertical-align: middle;
       color: #9ea0a6;
@@ -258,9 +260,8 @@
     }
     footer{
       font-size: 15px;
-      text-align: center;
       padding: 15px 10px;
-      position: absolute;
+      position: fixed;
       width: 100%;
       bottom: 0;
       text-align: left;
@@ -336,7 +337,6 @@
       }
       .header__updated{
         display: block;
-        text-align: center;
         font-size: 14px;
         line-height: 1;
         text-align: center;
@@ -451,7 +451,7 @@
 
 	<footer>
 		
-	    <div class="header__updated">UPD: 12.06.2018</div>
+	    <div class="header__updated">UPD: 24.07.2018</div>
 		  <a href="https://point-agency.net" target="_blank">point-agency.net</a>
 	</footer>
 
