@@ -1,0 +1,10 @@
+mixin breadcrumbs(mod, items)
+	ul(class= mod !== true ? 'breadcrumbs' : 'breadcrumbs breadcrumbs--white')
+		each item, index in items
+			if (index === items.length - 1)
+				li.breadcrumbs__item.breadcrumbs__item--last
+					span.breadcrumbs__link= item
+			else
+				li.breadcrumbs__item
+					a.breadcrumbs__link(href="#")= item
+//+breadcrumbs(false, ['Bread item 1', 'Bread item 2', '...'])
