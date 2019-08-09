@@ -1,13 +1,99 @@
 extends layouts/_layout
 block variables
 	- var title = 'Главная страница'
-	- var pageClass = 'home-page'
+	- var pageClass = ''
 
 
 block content
-	h1 Gulp starter of
-		a(href="https://point-agency.net" target="_blank") Point agency
-	p icon mixin example
-	+icon('icon-facebook')
-	p button mixin example
-	+button('Button')
+	.main
+		.head
+			.head__heading Gewinnspiel
+			.head__sub Jetzt teilnehmen und…
+			.head__desc Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod rempor nvidunt ut labore ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit. Duis aute irure dolor in reprehenderit.
+		.main__steps
+			ul.steps
+				-var steps = ["Ihre Antwort", "Ihre Daten", "Fertig"]
+				each step, index in steps
+					if index==0 
+						li.steps__single.active
+							.steps__heading=step
+							.steps__line
+								span.line
+								span.number 1
+					else
+						li.steps__single
+							.steps__heading=step
+							.steps__line
+								span.line
+								span.number=index+1
+			form.form
+				.content
+					.content__single.content__single--first.active
+						.content__heading Frage:
+						.content__row
+							.content--left
+								
+								.content__text Hier ist die Gewinnspielfrage…Bitte wählen Sie eine der Antwortmöglichkeiten dazu aus.
+
+							.content--right
+								ul.content__radio
+									li.radio_item
+										label
+											input(type="radio" name="step1" value="Antwortmöglichkeit 1")
+											span Antwortmöglichkeit 1
+									li.radio_item
+										label
+											input(type="radio" name="step1" value="Antwortmöglichkeit 2")
+											span Antwortmöglichkeit 2
+									li.radio_item
+										label
+											input(type="radio" name="step1" value="Antwortmöglichkeit 3")
+											span Antwortmöglichkeit 3
+
+					.content__single.content__single--second
+						.content__heading Daten erfassen:
+						.input__row
+							.input--left
+								label(for="name") Ihr Vorname*
+							.input--right
+								input(type="text" id="name" minlength="3")
+						.input__row
+							.input--left
+								label(for="surname") Nachname*
+							.input--right
+								input(type="text" id="surname" minlength="3")
+						.input__row
+							.input--left
+								label(for="email") E-Mail Adresse*
+							.input--right
+								input(type="email" id="email")
+						.input__row
+							.input--left
+								label(for="phone") Telefon
+							.input--right
+								input(type="phone" id="phone")
+						
+
+				footer.footer
+					.footer__row
+						.footer__prev
+							a(href="javascript:;").footer__prev_button.button Zurück
+						.footer__next
+							button(type="submit").footer__next_button.button Weiter
+
+					.footer__bottom
+						.footer__bottom_text Die mit
+							=" "
+							span *
+							=" "
+							|gekennzeichneten Felder sind Pflichtfelder.
+						ul.footer__social
+							li
+								a(href="http://www.genossenschaftsverband.de/impressum/" target="_blank" rel="nofollow") Impressum
+							li
+								a(href="http://www.genossenschaftsverband.de/datenschutz" target="_blank"  rel="nofollow") Datenschutz
+
+
+			
+				
+	
