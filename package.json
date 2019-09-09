@@ -63,7 +63,7 @@
     "run-sequence": "^2.2.1",
     "through2": "^2.0.1",
     "webpack": "^4.6.0",
-    "webpack-bundle-analyzer": "^2.11.1",
+    "webpack-bundle-analyzer": "^3.3.2",
     "webpack-glsl-loader": "^1.0.1"
   }
 }
