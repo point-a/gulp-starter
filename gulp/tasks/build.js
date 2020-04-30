@@ -17,7 +17,7 @@ function build(cb) {
     spriteSvg,
     svgo,
     sass,
-    // pug,
+    pug,
     // webpack,
     // copy,
     // listPages,

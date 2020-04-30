@@ -1,4 +1,4 @@
-var gulp        = require('gulp');
+// var gulp        = require('gulp');
 var pug         = require('gulp-pug');
 var plumber     = require('gulp-plumber');
 var changed     = require('gulp-changed');
@@ -7,9 +7,10 @@ var frontMatter = require('gulp-front-matter');
 var prettify    = require('gulp-prettify');
 var config      = require('../config');
 
+const { task, watch, src, dest, series } = require('gulp');
+
 function renderHtml(onlyChanged) {
-    return gulp
-            .src([config.src.templates + '/[^_]*.pug'])
+    return src([config.src.templates + '/[^_]*.pug'])
             .pipe(plumber({ errorHandler: config.errorHandler }))
             .pipe(gulpif(onlyChanged, changed(config.dest.html, { extension: '.html' })))
             .pipe(frontMatter({ property: 'data' }))
@@ -21,32 +22,26 @@ function renderHtml(onlyChanged) {
                 // unformatted: [],
                 end_with_newline: true
             }))
-            .pipe(gulp.dest(config.dest.html));
+            .pipe(dest(config.dest.html));
 }
 
 // gulp.task('pug', function() {
 //     return renderHtml();
 // });
 
-gulp.task('pug:changed', function() {
+task('pug:changed', function() {
     return renderHtml(true);
 });
 
-gulp.task('pug:watch', function(cb) {
-    gulp.watch([config.src.templates + '/**/_*.pug'], gulp.series(['pug']));
-    gulp.watch([config.src.templates + '/**/[^_]*.pug'], gulp.series(['pug:changed']));
+task('pug:watch', function(cb) {
+    watch([config.src.templates + '/**/_*.pug'], series(['pug']));
+    watch([config.src.templates + '/**/[^_]*.pug'], series(['pug:changed']));
     cb();
 });
-
-
-
-
 
 
 function pug() {
   return renderHtml();
 }
 
-module.exports = {
-  pug,
-}
+exports.build = pug;

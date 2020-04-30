@@ -1,4 +1,4 @@
-var gulp         = require('gulp');
+// var gulp         = require('gulp');
 var sass         = require('gulp-sass');
 var sourcemaps   = require('gulp-sourcemaps');
 var postcss      = require('gulp-postcss');
@@ -6,6 +6,9 @@ var autoprefixer = require('autoprefixer');
 var mqpacker     = require('css-mqpacker');
 var config       = require('../config');
 var csso = require('postcss-csso');
+
+const { task, watch, src, series, dest } = require('gulp');
+
 
 var processors = [
     autoprefixer({
@@ -19,22 +22,8 @@ var processors = [
     csso
 ];
 
-// gulp.task('sass', function() {
-//     return gulp
-//         .src(config.src.sass + '/*.{sass,scss}')
-//         .pipe(sourcemaps.init())
-//         .pipe(sass({
-//             outputStyle: config.production ? 'compact' : 'expanded', // nested, expanded, compact, compressed
-//             precision: 5
-//         }))
-//         .on('error', config.errorHandler)
-//         .pipe(postcss(processors))
-//         .pipe(sourcemaps.write('./'))
-//         .pipe(gulp.dest(config.dest.css));
-// });
-
-gulp.task('sass:watch', function(cb) {
-  gulp.watch([config.src.sass + '/**/*.{sass,scss}'], gulp.series(['sass']));
+task('sass:watch', function(cb) {
+  watch([config.src.sass + '/**/*.{sass,scss}'], series(['sass']));
   cb();
 });
 
@@ -47,8 +36,8 @@ function isMin(mq) {
 }
 
 function sortMediaQueries(a, b) {
-  A = a.replace(/\D/g, '');
-  B = b.replace(/\D/g, '');
+  const A = a.replace(/\D/g, '');
+  const B = b.replace(/\D/g, '');
 
   if (isMax(a) && isMax(b)) {
       return B - A;
@@ -61,34 +50,19 @@ function sortMediaQueries(a, b) {
   }
 }
 
-function sass(cb) {
-  // return gulp
-  //         .src(config.src.sass + '/*.{sass,scss}')
-  //         .pipe(sourcemaps.init())
-  //         .pipe(sass({
-  //             outputStyle: config.production ? 'compact' : 'expanded', // nested, expanded, compact, compressed
-  //             precision: 5
-  //         }))
-  //         .on('error', config.errorHandler)
-  //         .pipe(postcss(processors))
-  //         .pipe(sourcemaps.write('./'))
-  //         .pipe(gulp.dest(config.dest.css));
-
-  gulp
-    .src(config.src.sass + '/*.{sass,scss}')
+async function sass(done) {
+  src(config.src.sass + '/*.{sass,scss}')
     .pipe(sourcemaps.init())
     .pipe(sass({
-        outputStyle: config.production ? 'compact' : 'expanded', // nested, expanded, compact, compressed
-        precision: 5
+      outputStyle: config.production ? 'compact' : 'expanded', // nested, expanded, compact, compressed
+      precision: 5
     }))
     .on('error', config.errorHandler)
     .pipe(postcss(processors))
     .pipe(sourcemaps.write('./'))
-    .pipe(gulp.dest(config.dest.css));
-  
-  cb();
+    .pipe(dest(config.dest.css));
+
+  done();
 }
 
-module.exports = {
-  sass
-}
+exports.build = sass;
