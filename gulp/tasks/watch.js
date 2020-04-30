@@ -1,13 +1,12 @@
-var gulp   = require('gulp');
-var config = require('../config');
+let { webpackWatch } = require('./webpack');
+let gulp = require('gulp');
 
-gulp.task('watch', 
-    ['copy:watch',
-    
+gulp.task('watch', gulp.series([
+    'copy:watch',
     'pug:watch',
     'sprite:svg:watch',
     'svgo:watch',
     'list-pages:watch',
-    'webpack:watch',
+    webpackWatch,
     'sass:watch'
-]);
+]));

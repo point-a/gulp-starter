@@ -28,15 +28,35 @@ function handler(err, stats, cb) {
     if (typeof cb === 'function') cb();
 }
 
-gulp.task('webpack', function(cb) {
-    webpack(webpackConfig(config.env)).run(function(err, stats) {
-        handler(err, stats, cb);
-    });
-});
+// gulp.task('webpack', function(cb) {
+//     webpack(webpackConfig(config.env)).run(function(err, stats) {
+//         handler(err, stats, cb);
+//     });
+// });
 
-gulp.task('webpack:watch', function() {
-    webpack(webpackConfig(config.env)).watch({
-        aggregateTimeout: 100,
-        poll: false
-    }, handler);
-});
+// gulp.task('webpack:watch', function(cb) {
+//     webpack(webpackConfig(config.env)).watch({
+//         aggregateTimeout: 100,
+//         poll: false
+//     }, handler);
+//     cb();
+// });
+
+function webpack(cb) {
+  webpack(webpackConfig(config.env)).run(function(err, stats) {
+    handler(err, stats, cb);
+  });
+}
+
+function webpackWatch(cb) {
+	webpack(webpackConfig(config.env)).watch({
+			aggregateTimeout: 100,
+			poll: false
+  }, handler);
+  cb()
+}
+
+module.exports = { 
+  webpack,
+  webpackWatch
+};

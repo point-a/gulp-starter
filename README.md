@@ -1,3 +1,6 @@
+### ❗️❗️❗️ IMPORTANT
+**This gulp starter based on [generator-man](https://github.com/coderiver/generator-man)**
+
 ## How to use
 
 Clone this repo and then in command line type:

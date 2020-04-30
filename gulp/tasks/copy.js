@@ -34,13 +34,34 @@ gulp.task('copy:img', function () {
         .pipe(gulp.dest(config.dest.img));
 });
 
-gulp.task('copy', [
-    'copy:img',
-    // 'copy:rootfiles',
-    // 'copy:lib',
-    // 'copy:data',
-    'copy:fonts'
-]);
-gulp.task('copy:watch', function () {
-    gulp.watch(config.src.img + '/*', ['copy']);
+gulp.task('copy', gulp.series([
+		'copy:img',
+		// 'copy:rootfiles',
+		// 'copy:lib',
+		// 'copy:data',
+		'copy:fonts'
+  ]));
+
+gulp.task('copy:watch', function (cb) {
+  gulp.watch([config.src.img + '/*',config.src.fonts + '/*'], gulp.series(['copy']));
+  cb();
 });
+
+
+
+
+
+function copy(cb) {
+  gulp.series([
+		'copy:img',
+		// 'copy:rootfiles',
+		// 'copy:lib',
+		// 'copy:data',
+		'copy:fonts'
+  ]);
+  cb();
+}
+
+module.exports = {
+  copy,
+}
