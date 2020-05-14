@@ -1,4 +1,4 @@
-// var gulp         = require('gulp');
+var gulp         = require('gulp');
 var sass         = require('gulp-sass');
 var sourcemaps   = require('gulp-sourcemaps');
 var postcss      = require('gulp-postcss');
@@ -22,10 +22,10 @@ var processors = [
     csso
 ];
 
-task('sass:watch', function(cb) {
-  watch([config.src.sass + '/**/*.{sass,scss}'], series(['sass']));
-  cb();
-});
+// task('sass:watch', function(cb) {
+//   watch([config.src.sass + '/**/*.{sass,scss}'], series(['sass']));
+//   cb();
+// });
 
 function isMax(mq) {
   return /max-width/.test(mq);
@@ -50,8 +50,14 @@ function sortMediaQueries(a, b) {
   }
 }
 
-async function sass(done) {
-  src(config.src.sass + '/*.{sass,scss}')
+function sassWatch(cb) {
+  watch([config.src.sass + '/**/*.{sass,scss}'], series(['sass']));
+  cb();
+}
+
+function sassTask() {
+  return gulp
+    .src(config.src.sass + '/*.{sass,scss}')
     .pipe(sourcemaps.init())
     .pipe(sass({
       outputStyle: config.production ? 'compact' : 'expanded', // nested, expanded, compact, compressed
@@ -61,8 +67,9 @@ async function sass(done) {
     .pipe(postcss(processors))
     .pipe(sourcemaps.write('./'))
     .pipe(dest(config.dest.css));
-
-  done();
 }
 
-exports.build = sass;
+module.exports = {
+  sassTask,
+  sassWatch,
+}

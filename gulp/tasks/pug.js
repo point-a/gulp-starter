@@ -29,19 +29,32 @@ function renderHtml(onlyChanged) {
 //     return renderHtml();
 // });
 
-task('pug:changed', function() {
-    return renderHtml(true);
-});
+// task('pug:changed', function() {
+//     return renderHtml(true);
+// });
 
-task('pug:watch', function(cb) {
-    watch([config.src.templates + '/**/_*.pug'], series(['pug']));
-    watch([config.src.templates + '/**/[^_]*.pug'], series(['pug:changed']));
-    cb();
-});
+// task('pug:watch', function(cb) {
+//     watch([config.src.templates + '/**/_*.pug'], series(['pug']));
+//     watch([config.src.templates + '/**/[^_]*.pug'], series(['pug:changed']));
+//     cb();
+// });
 
 
-function pug() {
+function pugChanged(cb) {
+  return renderHtml(true);
+}
+
+function pugWatch(cb) {
+  watch([config.src.templates + '/**/_*.pug'], series(pugTask));
+  watch([config.src.templates + '/**/[^_]*.pug'], series(pugChanged));
+  cb();
+}
+
+function pugTask() {
   return renderHtml();
 }
 
-exports.build = pug;
+module.exports = {
+  pugTask,
+  pugWatch
+}

@@ -70,15 +70,18 @@ var config      = require('../../config');
 //         .pipe(gulp.dest(config.dest.img));
 // });
 
-gulp.task('sprite:svg:watch', function(cb) {
-    gulp.watch([config.src.iconsSvg + '/*.svg'], gulp.series(['sprite:svg']));
-    cb();
-});
+// gulp.task('sprite:svg:watch', function(cb) {
+//     gulp.watch([config.src.iconsSvg + '/*.svg'], gulp.series(['sprite:svg']));
+//     cb();
+// });
 
 
 
 
-
+function spriteSvgWatch(cb) {
+  gulp.watch([config.src.iconsSvg + '/*.svg'], gulp.series(['sprite:svg']));
+  cb();
+}
 
 function spriteSvg() {
   return gulp
@@ -144,4 +147,5 @@ function spriteSvg() {
 
 module.exports = {
   spriteSvg,
+  spriteSvgWatch,
 }

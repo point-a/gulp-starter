@@ -5,9 +5,9 @@ var config      = require('../config');
 let { clean } = require('./clean');
 let { spriteSvg } = require('./sprite-svg/sprite-svg');
 let { svgo } = require('./svgo');
-let { sass } = require('./sass');
-let { pug } = require('./pug');
-let { webpack } = require('./webpack');
+let { sassTask } = require('./sass');
+let { pugTask } = require('./pug');
+let { webpackTask } = require('./webpack');
 let { copy } = require('./copy');
 let { listPages } = require('./index/index-page');
 
@@ -16,23 +16,40 @@ function build(cb) {
     clean,
     spriteSvg,
     svgo,
-    sass,
-    pug,
-    // webpack,
-    // copy,
-    // listPages,
+    sassTask,
+    pugTask,
+    webpackTask,
+    copy,
+    listPages,
     cb
   );
 }
 
-gulp.task('build', function(cb) {
+// gulp.task('build', function(cb) {
+//   config.setEnv('production');
+//   config.logEnv();
+//   build(cb);
+// });
+
+// gulp.task('build:dev', function(cb) {
+//   config.setEnv('development');
+//   config.logEnv();
+//   build(cb);
+// });
+
+function buildTask(cb) {
   config.setEnv('production');
   config.logEnv();
   build(cb);
-});
+}
 
-gulp.task('build:dev', function(cb) {
+function buildDevTask(cb) {
   config.setEnv('development');
   config.logEnv();
   build(cb);
-});
+}
+
+module.exports = {
+  buildTask,
+  buildDevTask
+}
