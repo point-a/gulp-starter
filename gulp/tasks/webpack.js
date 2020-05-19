@@ -3,7 +3,6 @@ var webpack         = require('webpack');
 var browserSync     = require('browser-sync').create();
 var gutil           = require('gulp-util');
 var notify          = require('gulp-notify');
-var { serverTask }  = require('./server');
 var config          = require('../config');
 var webpackConfig   = require('../../webpack.config').createConfig;
 

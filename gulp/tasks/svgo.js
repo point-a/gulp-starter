@@ -35,7 +35,7 @@ var config   = require('../config');
 
 
 function svgoWatch(cb) {
-  gulp.watch([config.src.img + '/svgo/**/*.svg'], gulp.series(['svgo']));
+  gulp.watch([config.src.img + '/svgo/**/*.svg'], gulp.series(svgo));
   cb();
 }
 

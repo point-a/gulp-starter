@@ -18,16 +18,17 @@ let { sassWatch } = require('./sass');
 //     'sass:watch'
 // ]));
 
+
 function watchTask(cb) {
-  gulp.series([
+  gulp.series(
     copyWatch,
     pugWatch,
     spriteSvgWatch,
     svgoWatch,
     listPagesWatch,
+    sassWatch,
     webpackWatch,
-    sassWatch
-  ]);
+  )();
   cb();
 }
 

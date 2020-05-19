@@ -25,7 +25,7 @@ require('require-yaml');
 
 
 function listPagesWatch(cb) {
-  gulp.watch([config.src.root+'/*', 'gulp/tasks/index/index.html'], gulp.series(['list-pages']));
+  gulp.watch([config.src.root+'/*', 'gulp/tasks/index/index.html'], gulp.series(listPages));
   cb();
 }
 

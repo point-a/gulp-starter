@@ -1,29 +1,29 @@
 var gulp = require('gulp');
 var config = require('../config.js');
 
-gulp.task('copy:fonts', function () {
-    return gulp
-        .src(config.src.fonts + '/*.{ttf,eot,woff,woff2}')
-        .pipe(gulp.dest(config.dest.fonts));
-});
+// gulp.task('copy:fonts', function () {
+//     return gulp
+//         .src(config.src.fonts + '/*.{ttf,eot,woff,woff2}')
+//         .pipe(gulp.dest(config.dest.fonts));
+// });
 
-gulp.task('copy:data', function () {
-    return gulp
-        .src(config.src.data + '/**/*.*')
-        .pipe(gulp.dest(config.dest.data));
-});
+// gulp.task('copy:data', function () {
+//     return gulp
+//         .src(config.src.data + '/**/*.*')
+//         .pipe(gulp.dest(config.dest.data));
+// });
 
-gulp.task('copy:lib', function () {
-    return gulp
-        .src(config.src.lib + '/**/*.*')
-        .pipe(gulp.dest(config.dest.lib));
-});
+// gulp.task('copy:lib', function () {
+//     return gulp
+//         .src(config.src.lib + '/**/*.*')
+//         .pipe(gulp.dest(config.dest.lib));
+// });
 
-gulp.task('copy:rootfiles', function () {
-    return gulp
-        .src(config.src.root + '/*.*')
-        .pipe(gulp.dest(config.dest.root));
-});
+// gulp.task('copy:rootfiles', function () {
+//     return gulp
+//         .src(config.src.root + '/*.*')
+//         .pipe(gulp.dest(config.dest.root));
+// });
 
 // gulp.task('copy:img', function () {
 //     return gulp
@@ -65,18 +65,18 @@ function copyFonts(cb) {
 }
 
 function copyWatch(cb) {
-  gulp.watch([config.src.img + '/*',config.src.fonts + '/*'], gulp.series(['copy']));
+  gulp.watch([config.src.img + '/*',config.src.fonts + '/*'], gulp.series(copy));
   cb();
 }
 
 function copy(cb) {
-  gulp.series([
+  gulp.series(
     copyImg,
     // 'copy:rootfiles',
     // 'copy:lib',
     // 'copy:data',
     copyFonts
-  ]);
+  )();
   cb();
 }
 

@@ -79,7 +79,7 @@ var config      = require('../../config');
 
 
 function spriteSvgWatch(cb) {
-  gulp.watch([config.src.iconsSvg + '/*.svg'], gulp.series(['sprite:svg']));
+  gulp.watch([config.src.iconsSvg + '/*.svg'], gulp.series(spriteSvg));
   cb();
 }
 

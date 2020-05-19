@@ -51,7 +51,7 @@ function sortMediaQueries(a, b) {
 }
 
 function sassWatch(cb) {
-  watch([config.src.sass + '/**/*.{sass,scss}'], series(['sass']));
+  watch([config.src.sass + '/**/*.{sass,scss}'], series(sassTask));
   cb();
 }
 
