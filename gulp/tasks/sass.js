@@ -12,7 +12,6 @@ const { task, watch, src, series, dest } = require('gulp');
 
 var processors = [
     autoprefixer({
-        browsers: ['last 4 versions'],
         cascade: false
     }),
     require('lost'),
